@@ -64,9 +64,10 @@ jobs:
           sed -i -e 's/"synoinfo": {},/"synoinfo": {\n\t"maxlanport": "2"\n    },/' ${{matrix.platform}}_user_config.json
           cat ${{matrix.platform}}_user_config.json
       - name: 添加扩展驱动
-        if: matrix.platform != 'dva3221'
         run: |
+          ./redpill_tool_chain.sh add https://github.com/tossp/redpill-tool-chain/raw/master/extensions/redpill-boot-wait.json
           ./redpill_tool_chain.sh add https://github.com/tossp/redpill-tool-chain/raw/master/extensions/redpill-acpid.json
+          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/igb/rpext-index.json
           echo '等待整理兼容性扩展~😀'
       - name: 添加 Misc shell
         run: |
